@@ -19,11 +19,14 @@ const Header = () => {
           <Link href="/" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
             Home
           </Link>
-          <Link href="/about" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
-            About
+          <Link href="/team" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+            Equipo
           </Link>
-          <Link href="/contact" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
-            Contact
+          <Link href="/horses" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+            Caballos
+          </Link>
+          <Link href="/services" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+            Servicios
           </Link>
         </nav>
       </div>

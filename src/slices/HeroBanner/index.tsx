@@ -26,7 +26,7 @@ const HeroBanner: FC<HeroBannerProps> = ({ slice }) => {
           className="absolute inset-0 w-full h-full object-cover"
         />
       )}
-      <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+      {/* <div className="absolute inset-0 bg-black bg-opacity-40"></div> */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-white text-center px-4 max-w-7xl mx-auto">
         {primary.title && (
           <h1 className="text-4xl md:text-6xl font-bold mb-4">

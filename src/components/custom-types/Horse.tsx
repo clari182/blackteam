@@ -41,17 +41,6 @@ export const Horse = ({ horse }: HorseProps) => {
           </div>
         </div>
       </div>
-      
-      {data.slices && data.slices.length > 0 && (
-        <div className="mt-8">
-          {data.slices.map((slice, index) => {
-            if (slice.slice_type === "image_gallery") {
-              return <ImageGallery key={index} slice={slice} index={index} slices={data.slices} context={{}} />;
-            }
-            return null;
-          })}
-        </div>
-      )}
     </div>
   );
 }; 

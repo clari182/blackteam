@@ -17,7 +17,7 @@ export default function Home({ page }: HomeProps) {
   }
 
   return (
-    <div className="container mx-auto px-4">
+    <div className=" w-full">
       <SafeSliceZone slices={page.data.slices} />
     </div>
   );
