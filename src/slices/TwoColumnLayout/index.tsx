@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Content } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
+import { SliceComponentProps, PrismicImage, PrismicRichText } from "@prismicio/react";
 
 /**
  * Props for `TwoColumnLayout`.
@@ -12,40 +12,40 @@ export type TwoColumnLayoutProps =
  * Component for "TwoColumnLayout" Slices.
  */
 const TwoColumnLayout: FC<TwoColumnLayoutProps> = ({ slice }) => {
+  const { primary } = slice;
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
+      className="py-12"
     >
-      Placeholder component for two_column_layout (variation: {slice.variation})
-      slices.
-      <br />
-      <strong>You can edit this slice directly in your code editor.</strong>
-      {/**
-       * 💡 Use Prismic MCP with your code editor
-       *
-       * Get AI-powered help to build your slice components — based on your actual model.
-       *
-       * ▶️ Setup:
-       * 1. Add a new MCP Server in your code editor:
-       *
-       * {
-       *   "mcpServers": {
-       *     "Prismic MCP": {
-       *       "command": "npx",
-       *       "args": ["-y", "@prismicio/mcp-server"]
-       *     }
-       *   }
-       * }
-       *
-       * 2. Select Claude 3.7 Sonnet (recommended for optimal output)
-       *
-       * ✅ Then open your slice file and ask your code editor:
-       *    "Code this slice"
-       *
-       * Your code editor reads your slice model and helps you code faster ⚡
-       * 📚 Give your feedback: https://community.prismic.io/t/help-us-shape-the-future-of-slice-creation/19505
-       */}
+      <div className="max-w-7xl mx-auto px-4">
+        {primary.group && primary.group.map((item, index) => (
+          <div key={index} className="mb-16 last:mb-0">
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-center ${
+              item.type ? 'md:flex-row-reverse' : ''
+            }`}>
+              <div className={`${item.type ? 'md:order-2' : 'md:order-1'}`}>
+                {item.text && (
+                  <div className="prose lg:prose-xl">
+                    <PrismicRichText field={item.text} />
+                  </div>
+                )}
+              </div>
+              
+              <div className={`${item.type ? 'md:order-1' : 'md:order-2'}`}>
+                {item.image && (
+                  <PrismicImage
+                    field={item.image}
+                    className="rounded-lg shadow-lg w-full"
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 };
