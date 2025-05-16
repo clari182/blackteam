@@ -1,0 +1,39 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "bound",
+				"type": "Text"
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ad quis veniam pariatur do incididunt dolore fugiat minim. Amet et aute pariatur ea velit duis excepteur consectetur occaecat enim fugiat amet nulla minim. Culpa in in nostrud laborum id quis sunt quis."
+						}
+					}
+				]
+			},
+			"button_label": {
+				"__TYPE__": "FieldContent",
+				"value": "present",
+				"type": "Text"
+			},
+			"button_link": {
+				"__TYPE__": "LinkContent",
+				"key": "e0116f3e-afdb-42f2-8ab2-e4ca120e4da4",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://google.com",
+					"text": "slight"
+				}
+			}
+		},
+		"items": []
+	}
+]
