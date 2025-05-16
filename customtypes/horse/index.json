@@ -26,13 +26,6 @@
           "placeholder": ""
         }
       },
-      "profile_photo": {
-        "type": "Image",
-        "config": {
-          "label": "Profile Photo",
-          "thumbnails": []
-        }
-      },
       "breed": {
         "type": "Text",
         "config": {
@@ -52,17 +45,6 @@
         "config": {
           "label": "Gender",
           "options": ["Mare", "Gelding", "Stallion"]
-        }
-      },
-      "slices": {
-        "type": "Slices",
-        "fieldset": "Slice Zone",
-        "config": {
-          "choices": {
-            "image_gallery": {
-              "type": "SharedSlice"
-            }
-          }
         }
       }
     }

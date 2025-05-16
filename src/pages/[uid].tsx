@@ -1,9 +1,8 @@
 // pages/[uid].tsx
 import { createClient } from '../prismicio';
-import { SliceZone } from '@prismicio/react';
-import { components } from '../slices';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { PrismicDocument } from '@prismicio/client';
+import SafeSliceZone from '../components/SafeSliceZone';
 
 interface PageProps {
   page: PrismicDocument | null;
@@ -20,7 +19,7 @@ export default function Page({ page }: PageProps) {
 
   return (
     <div className="container mx-auto px-4">
-      <SliceZone slices={page.data.slices} components={components} />
+      <SafeSliceZone slices={page.data.slices} />
     </div>
   );
 }

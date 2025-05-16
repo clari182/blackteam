@@ -1,8 +1,7 @@
 import { GetStaticProps } from 'next';
 import { createClient } from '../prismicio';
-import { SliceZone } from '@prismicio/react';
-import { components } from '../slices';
 import { PrismicDocument } from '@prismicio/client';
+import SafeSliceZone from '../components/SafeSliceZone';
 
 interface HomeProps {
   page: PrismicDocument | null;
@@ -19,7 +18,7 @@ export default function Home({ page }: HomeProps) {
 
   return (
     <div className="container mx-auto px-4">
-      <SliceZone slices={page.data.slices} components={components} />
+      <SafeSliceZone slices={page.data.slices} />
     </div>
   );
 }

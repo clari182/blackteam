@@ -4,8 +4,6 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type HorseDocumentDataSlicesSlice = ImageGallerySlice;
-
 /**
  * Content for Horse documents
  */
@@ -31,17 +29,6 @@ interface HorseDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   description: prismic.KeyTextField;
-
-  /**
-   * Profile Photo field in *Horse*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: horse.profile_photo
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  profile_photo: prismic.ImageField<never>;
 
   /**
    * Breed field in *Horse*
@@ -75,17 +62,6 @@ interface HorseDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#select
    */
   gender: prismic.SelectField<"Mare" | "Gelding" | "Stallion">;
-
-  /**
-   * Slice Zone field in *Horse*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: horse.slices[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices: prismic.SliceZone<HorseDocumentDataSlicesSlice>;
 }
 
 /**
@@ -99,6 +75,71 @@ interface HorseDocumentData {
  */
 export type HorseDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<HorseDocumentData>, "horse", Lang>;
+
+type HorsesDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Horses documents
+ */
+interface HorsesDocumentData {
+  /**
+   * Slice Zone field in *Horses*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: horses.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<HorsesDocumentDataSlicesSlice> /**
+   * Meta Title field in *Horses*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: horses.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Horses*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: horses.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Horses*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: horses.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Horses document from Prismic
+ *
+ * - **API ID**: `horses`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type HorsesDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<HorsesDocumentData>,
+    "horses",
+    Lang
+  >;
 
 type PageDocumentDataSlicesSlice =
   | QuoteSlice
@@ -122,6 +163,17 @@ interface PageDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   title: prismic.KeyTextField;
+
+  /**
+   * Description field in *Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
 
   /**
    * Slice Zone field in *Page*
@@ -302,59 +354,12 @@ export type TeamMemberDocument<Lang extends string = string> =
     Lang
   >;
 
-type TwocolumnDocumentDataSlicesSlice = TwoColumnLayoutSlice;
-
-/**
- * Content for TwoColumn documents
- */
-interface TwocolumnDocumentData {
-  /**
-   * Type field in *TwoColumn*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **API ID Path**: twocolumn.type
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  type: prismic.SelectField<
-    "Text left - Image right" | "Image left - Text right"
-  >;
-
-  /**
-   * Slice Zone field in *TwoColumn*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: twocolumn.slices[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-  slices: prismic.SliceZone<TwocolumnDocumentDataSlicesSlice>;
-}
-
-/**
- * TwoColumn document from Prismic
- *
- * - **API ID**: `twocolumn`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/custom-types
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type TwocolumnDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<TwocolumnDocumentData>,
-    "twocolumn",
-    Lang
-  >;
-
 export type AllDocumentTypes =
   | HorseDocument
+  | HorsesDocument
   | PageDocument
   | ServiceDocument
-  | TeamMemberDocument
-  | TwocolumnDocument;
+  | TeamMemberDocument;
 
 /**
  * Primary content in *CallToAction → Default → Primary*
@@ -501,6 +506,103 @@ export type HeroBannerSlice = prismic.SharedSlice<
   "hero_banner",
   HeroBannerSliceVariation
 >;
+
+/**
+ * Primary content in *Horses → Default → Primary*
+ */
+export interface HorsesSliceDefaultPrimary {
+  /**
+   * Title field in *Horses → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Our Horses
+   * - **API ID Path**: horses.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *Horses → Items*
+ */
+export interface HorsesSliceDefaultItem {
+  /**
+   * Name field in *Horses → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Horse name
+   * - **API ID Path**: horses.items[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Breed field in *Horses → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Horse breed
+   * - **API ID Path**: horses.items[].breed
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  breed: prismic.KeyTextField;
+
+  /**
+   * Gender field in *Horses → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Select gender
+   * - **API ID Path**: horses.items[].gender
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  gender: prismic.SelectField<"Mare" | "Gelding" | "Stallion">;
+
+  /**
+   * Description field in *Horses → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: About the horse
+   * - **API ID Path**: horses.items[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * Horse image field in *Horses → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: horses.items[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for Horses Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HorsesSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<HorsesSliceDefaultPrimary>,
+  Simplify<HorsesSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Horses*
+ */
+type HorsesSliceVariation = HorsesSliceDefault;
+
+/**
+ * Horses Shared Slice
+ *
+ * - **API ID**: `horses`
+ * - **Description**: Display a list of horses with alternating layout
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HorsesSlice = prismic.SharedSlice<"horses", HorsesSliceVariation>;
 
 /**
  * Item in *ImageGallery → Default → Primary → Images*
@@ -685,6 +787,16 @@ export interface TwoColumnLayoutSliceDefaultPrimaryGroupItem {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
+
+  /**
+   * CustomType field in *TwoColumnLayout → Default → Primary → Group*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: two_column_layout.default.primary.group[].customtype
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  customtype: prismic.ContentRelationshipField<"horses" | "horse">;
 }
 
 /**
@@ -757,7 +869,9 @@ declare module "@prismicio/client" {
     export type {
       HorseDocument,
       HorseDocumentData,
-      HorseDocumentDataSlicesSlice,
+      HorsesDocument,
+      HorsesDocumentData,
+      HorsesDocumentDataSlicesSlice,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
@@ -766,9 +880,6 @@ declare module "@prismicio/client" {
       TeamMemberDocument,
       TeamMemberDocumentData,
       TeamMemberDocumentDataSocialsItem,
-      TwocolumnDocument,
-      TwocolumnDocumentData,
-      TwocolumnDocumentDataSlicesSlice,
       AllDocumentTypes,
       CallToActionSlice,
       CallToActionSliceDefaultPrimary,
@@ -778,6 +889,11 @@ declare module "@prismicio/client" {
       HeroBannerSliceDefaultPrimary,
       HeroBannerSliceVariation,
       HeroBannerSliceDefault,
+      HorsesSlice,
+      HorsesSliceDefaultPrimary,
+      HorsesSliceDefaultItem,
+      HorsesSliceVariation,
+      HorsesSliceDefault,
       ImageGallerySlice,
       ImageGallerySliceDefaultPrimaryImagesItem,
       ImageGallerySliceDefaultPrimary,

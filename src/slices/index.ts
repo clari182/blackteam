@@ -2,18 +2,11 @@
 
 import dynamic from "next/dynamic";
 
-const HeroBanner = dynamic(() => import("./HeroBanner"));
-const TextSection = dynamic(() => import("./TextSection"));
-const TwoColumnLayout = dynamic(() => import("./TwoColumnLayout"));
-const ImageGallery = dynamic(() => import("./ImageGallery"));
-const CallToAction = dynamic(() => import("./CallToAction"));
-const Quote = dynamic(() => import("./Quote"));
-
 export const components = {
-  hero_banner: HeroBanner,
-  text_section: TextSection,
-  two_column_layout: TwoColumnLayout,
-  image_gallery: ImageGallery,
-  call_to_action: CallToAction,
-  quote: Quote,
+  call_to_action: dynamic(() => import("./CallToAction")),
+  hero_banner: dynamic(() => import("./HeroBanner")),
+  image_gallery: dynamic(() => import("./ImageGallery")),
+  quote: dynamic(() => import("./Quote")),
+  text_section: dynamic(() => import("./TextSection")),
+  two_column_layout: dynamic(() => import("./TwoColumnLayout")),
 };

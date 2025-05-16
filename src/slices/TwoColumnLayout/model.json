@@ -43,6 +43,18 @@
                   "constraint": {},
                   "thumbnails": []
                 }
+              },
+              "customtype": {
+                "type": "Link",
+                "config": {
+                  "label": "CustomType",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    "horses",
+                    "horse"
+                  ]
+                }
               }
             }
           }
