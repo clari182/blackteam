@@ -46,6 +46,23 @@
           "label": "Gender",
           "options": ["Mare", "Gelding", "Stallion"]
         }
+      },
+      "profile_photo": {
+        "type": "Image",
+        "config": {
+          "label": "Profile photo",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "photo_placement": {
+        "type": "Boolean",
+        "config": {
+          "label": "Photo placement",
+          "placeholder_false": "Left",
+          "placeholder_true": "Right",
+          "default_value": false
+        }
       }
     }
   }

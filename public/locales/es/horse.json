@@ -1,0 +1,12 @@
+{
+  "Breed": "Raza",
+  "Gender": "Sexo",
+  "Birthdate": "Fecha de nacimiento",
+  "Description": "Descripción",
+  "Mare": "Yegua",
+  "Gelding": "Macho",
+  "Stallion": "Padrillo",
+  "Age": "Edad",
+  "year": "año",
+  "years": "años"
+}

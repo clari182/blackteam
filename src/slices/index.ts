@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 export const components = {
   call_to_action: dynamic(() => import("./CallToAction")),
   hero_banner: dynamic(() => import("./HeroBanner")),
+  horse: dynamic(() => import("./Horse")),
   image_gallery: dynamic(() => import("./ImageGallery")),
   quote: dynamic(() => import("./Quote")),
   text_section: dynamic(() => import("./TextSection")),

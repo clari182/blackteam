@@ -62,6 +62,29 @@ interface HorseDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#select
    */
   gender: prismic.SelectField<"Mare" | "Gelding" | "Stallion">;
+
+  /**
+   * Profile photo field in *Horse*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: horse.profile_photo
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  profile_photo: prismic.ImageField<never>;
+
+  /**
+   * Photo placement field in *Horse*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: horse.photo_placement
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  photo_placement: prismic.BooleanField;
 }
 
 /**
@@ -141,7 +164,23 @@ export type HorsesDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Item in *Page → Items*
+ */
+export interface PageDocumentDataItemsItem {
+  /**
+   * Item field in *Page → Items*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.items[].item
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  item: prismic.ContentRelationshipField<"horse">;
+}
+
 type PageDocumentDataSlicesSlice =
+  | HorseSlice
   | QuoteSlice
   | TextSectionSlice
   | TwoColumnLayoutSlice
@@ -174,6 +213,17 @@ interface PageDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   description: prismic.RichTextField;
+
+  /**
+   * Items field in *Page*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.items[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  items: prismic.GroupField<Simplify<PageDocumentDataItemsItem>>;
 
   /**
    * Slice Zone field in *Page*
@@ -508,101 +558,131 @@ export type HeroBannerSlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *Horses → Default → Primary*
+ * Item in *Horse → Default → Primary → Riders*
  */
-export interface HorsesSliceDefaultPrimary {
+export interface HorseSliceDefaultPrimaryRidersItem {
   /**
-   * Title field in *Horses → Default → Primary*
+   * Rider field in *Horse → Default → Primary → Riders*
    *
-   * - **Field Type**: Text
-   * - **Placeholder**: Our Horses
-   * - **API ID Path**: horses.default.primary.title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: horse.default.primary.riders[].rider
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  title: prismic.KeyTextField;
+  rider: prismic.ContentRelationshipField<"team_member">;
 }
 
 /**
- * Primary content in *Horses → Items*
+ * Primary content in *Horse → Default → Primary*
  */
-export interface HorsesSliceDefaultItem {
+export interface HorseSliceDefaultPrimary {
   /**
-   * Name field in *Horses → Items*
+   * Name field in *Horse → Default → Primary*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: Horse name
-   * - **API ID Path**: horses.items[].name
+   * - **Placeholder**: *None*
+   * - **API ID Path**: horse.default.primary.name
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   name: prismic.KeyTextField;
 
   /**
-   * Breed field in *Horses → Items*
+   * Description field in *Horse → Default → Primary*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: Horse breed
-   * - **API ID Path**: horses.items[].breed
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  breed: prismic.KeyTextField;
-
-  /**
-   * Gender field in *Horses → Items*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: Select gender
-   * - **API ID Path**: horses.items[].gender
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  gender: prismic.SelectField<"Mare" | "Gelding" | "Stallion">;
-
-  /**
-   * Description field in *Horses → Items*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: About the horse
-   * - **API ID Path**: horses.items[].description
+   * - **Placeholder**: *None*
+   * - **API ID Path**: horse.default.primary.description
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   description: prismic.KeyTextField;
 
   /**
-   * Horse image field in *Horses → Items*
+   * Breed field in *Horse → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: horse.default.primary.breed
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  breed: prismic.KeyTextField;
+
+  /**
+   * Birthdate field in *Horse → Default → Primary*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: horse.default.primary.birthdate
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  birthdate: prismic.DateField;
+
+  /**
+   * Photo field in *Horse → Default → Primary*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: horses.items[].image
+   * - **API ID Path**: horse.default.primary.photo
    * - **Documentation**: https://prismic.io/docs/field#image
    */
-  image: prismic.ImageField<never>;
+  photo: prismic.ImageField<never>;
+
+  /**
+   * Gender field in *Horse → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: horse.default.primary.gender
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  gender: prismic.SelectField<"Gelding" | "Mare" | "Stallion">;
+
+  /**
+   * Display field in *Horse → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: horse.default.primary.display
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  display: prismic.SelectField<"Image left" | "Image right">;
+
+  /**
+   * Riders field in *Horse → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: horse.default.primary.riders[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  riders: prismic.GroupField<Simplify<HorseSliceDefaultPrimaryRidersItem>>;
 }
 
 /**
- * Default variation for Horses Slice
+ * Default variation for Horse Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
  * - **Documentation**: https://prismic.io/docs/slice
  */
-export type HorsesSliceDefault = prismic.SharedSliceVariation<
+export type HorseSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Simplify<HorsesSliceDefaultPrimary>,
-  Simplify<HorsesSliceDefaultItem>
+  Simplify<HorseSliceDefaultPrimary>,
+  never
 >;
 
 /**
- * Slice variation for *Horses*
+ * Slice variation for *Horse*
  */
-type HorsesSliceVariation = HorsesSliceDefault;
+type HorseSliceVariation = HorseSliceDefault;
 
 /**
- * Horses Shared Slice
+ * Horse Shared Slice
  *
- * - **API ID**: `horses`
- * - **Description**: Display a list of horses with alternating layout
+ * - **API ID**: `horse`
+ * - **Description**: Horse
  * - **Documentation**: https://prismic.io/docs/slice
  */
-export type HorsesSlice = prismic.SharedSlice<"horses", HorsesSliceVariation>;
+export type HorseSlice = prismic.SharedSlice<"horse", HorseSliceVariation>;
 
 /**
  * Item in *ImageGallery → Default → Primary → Images*
@@ -623,6 +703,16 @@ export interface ImageGallerySliceDefaultPrimaryImagesItem {
  * Primary content in *ImageGallery → Default → Primary*
  */
 export interface ImageGallerySliceDefaultPrimary {
+  /**
+   * Title field in *ImageGallery → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_gallery.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
   /**
    * Images field in *ImageGallery → Default → Primary*
    *
@@ -787,16 +877,6 @@ export interface TwoColumnLayoutSliceDefaultPrimaryGroupItem {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
-
-  /**
-   * CustomType field in *TwoColumnLayout → Default → Primary → Group*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: two_column_layout.default.primary.group[].customtype
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  customtype: prismic.ContentRelationshipField<"horses" | "horse">;
 }
 
 /**
@@ -874,6 +954,7 @@ declare module "@prismicio/client" {
       HorsesDocumentDataSlicesSlice,
       PageDocument,
       PageDocumentData,
+      PageDocumentDataItemsItem,
       PageDocumentDataSlicesSlice,
       ServiceDocument,
       ServiceDocumentData,
@@ -889,11 +970,11 @@ declare module "@prismicio/client" {
       HeroBannerSliceDefaultPrimary,
       HeroBannerSliceVariation,
       HeroBannerSliceDefault,
-      HorsesSlice,
-      HorsesSliceDefaultPrimary,
-      HorsesSliceDefaultItem,
-      HorsesSliceVariation,
-      HorsesSliceDefault,
+      HorseSlice,
+      HorseSliceDefaultPrimaryRidersItem,
+      HorseSliceDefaultPrimary,
+      HorseSliceVariation,
+      HorseSliceDefault,
       ImageGallerySlice,
       ImageGallerySliceDefaultPrimaryImagesItem,
       ImageGallerySliceDefaultPrimary,

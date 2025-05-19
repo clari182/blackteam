@@ -11,11 +11,15 @@ export default function SafeSliceZone({ slices }: { slices: any[] }) {
 
   if (!isMounted) {
     return (
-      <div className="py-8">
+      <div className="py-8 h-full">
         <p className="text-center text-gray-500">Loading content...</p>
       </div>
     );
   }
 
-  return <SliceZone slices={slices} components={components} />;
+  return (
+    <div className="h-full">
+      <SliceZone slices={slices} components={components} />
+    </div>
+  );
 } 

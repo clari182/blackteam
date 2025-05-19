@@ -1,0 +1,17 @@
+{
+  "details": {
+    "breed": "Breed",
+    "gender": "Gender",
+    "birthdate": "Birthdate",
+    "description": "Description"
+  },
+  "genders": {
+    "mare": "Mare",
+    "gelding": "Gelding",
+    "stallion": "Stallion"
+  },
+  "display": {
+    "imageLeft": "Image left",
+    "imageRight": "Image right"
+  }
+} 

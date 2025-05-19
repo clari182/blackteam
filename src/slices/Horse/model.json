@@ -1,0 +1,98 @@
+{
+  "id": "horse",
+  "type": "SharedSlice",
+  "name": "Horse",
+  "description": "Horse",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "name": {
+          "type": "Text",
+          "config": {
+            "label": "Name",
+            "placeholder": ""
+          }
+        },
+        "description": {
+          "type": "Text",
+          "config": {
+            "label": "Description",
+            "placeholder": ""
+          }
+        },
+        "breed": {
+          "type": "Text",
+          "config": {
+            "label": "Breed",
+            "placeholder": ""
+          }
+        },
+        "birthdate": {
+          "type": "Date",
+          "config": {
+            "label": "Birthdate",
+            "placeholder": ""
+          }
+        },
+        "photo": {
+          "type": "Image",
+          "config": {
+            "label": "Photo",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "gender": {
+          "type": "Select",
+          "config": {
+            "label": "Gender",
+            "placeholder": "",
+            "options": [
+              "Gelding",
+              "Mare",
+              "Stallion"
+            ]
+          }
+        },
+        "display": {
+          "type": "Select",
+          "config": {
+            "label": "Display",
+            "placeholder": "",
+            "options": [
+              "Image left",
+              "Image right"
+            ]
+          }
+        },
+        "riders": {
+          "type": "Group",
+          "config": {
+            "label": "Riders",
+            "repeat": true,
+            "fields": {
+              "rider": {
+                "type": "Link",
+                "config": {
+                  "label": "Rider",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    "team_member"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

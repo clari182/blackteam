@@ -44,19 +44,6 @@ const TwoColumnLayout: FC<TwoColumnLayoutProps> = ({ slice }) => {
                     className="rounded-lg shadow-lg w-full"
                   />
                 )}
-                
-                {/* Display related content information */}
-                {isFilled.contentRelationship(item.customtype) && (
-                  <div className="mt-4 text-center">
-                    <Link 
-                      href={item.customtype.uid ? `/${item.customtype.type}/${item.customtype.uid}` : '#'} 
-                      className="inline-block px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-                    >
-                      View {item.customtype.type === 'horse' ? 'Horse' : 
-                            item.customtype.type === 'horses' ? 'Horses' : 'Details'}
-                    </Link>
-                  </div>
-                )}
               </div>
             </div>
           </div>
